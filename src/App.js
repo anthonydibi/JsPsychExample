@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import 'jspsych/css/jspsych.css'
 import Experiment from './Experiment';
 
