@@ -1,10 +1,21 @@
 import { initJsPsych } from "jspsych";
 import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
+import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 
 export default function Experiment() {
     const jsPsych = initJsPsych({ on_finish: function() {
         jsPsych.data.displayData();
     }});
+
+    const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    const study_id = jsPsych.data.getURLVariable('STUDY_ID');
+    const session_id = jsPsych.data.getURLVariable('SESSION_ID');
+
+    jsPsych.data.addProperties({
+        subject_id: subject_id,
+        study_id: study_id,
+        session_id: session_id
+    });
     
     //holds each phase of the experiment in order - welcome, instructions, trial, etc..
     const timeline = [];
@@ -19,7 +30,7 @@ export default function Experiment() {
     //and the response is a keyboard input. We don't provide input choices here since the user can press any key to begin
     const welcome = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: 'Welcome to the experiment. Press "continue" to advance.',
+        stimulus: `Welcome to the experiment. Press "continue" to advance. subject_id: ${subject_id}, study_id: ${study_id}, session_id: ${session_id}`,
         choices: ['Continue'],
     }
     timeline.push(welcome);
@@ -44,6 +55,15 @@ export default function Experiment() {
         timeline_variables: trial_faces
     };
     timeline.push(test_procedure);
+
+    const completion_page = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>That concludes the study. Click the following link to complete.</p>
+            <p><a href="https://app.prolific.co/submissions/complete?cc=C1MBJ904">Click here to return to Prolific and complete the study</a>.</p>`,
+        choices: "NO_KEYS" //user cannot go past this trial
+    }
+    
+    timeline.push(completion_page);
 
     jsPsych.run(timeline);
 
