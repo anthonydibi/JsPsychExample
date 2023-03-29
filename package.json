@@ -8,10 +8,18 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.30",
+    "@types/react-dom": "^18.0.11",
+    "aws-sdk": "^2.1344.0",
+    "crypto-js": "^4.1.1",
+    "fs": "^0.0.1-security",
     "jspsych": "^7.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "typescript": "^5.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

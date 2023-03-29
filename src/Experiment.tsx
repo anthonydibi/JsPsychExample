@@ -1,15 +1,17 @@
-import { initJsPsych } from "jspsych";
+import { initJsPsych, JsPsych } from "jspsych";
 import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
+import { Pretask } from "./Pretask";
+import { MainTask } from "./MainTask";
 
 export default function Experiment() {
-    const jsPsych = initJsPsych({ on_finish: function() {
+    const jsPsych: JsPsych = initJsPsych({ on_finish: function(): void {
         jsPsych.data.displayData();
     }});
 
-    const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-    const study_id = jsPsych.data.getURLVariable('STUDY_ID');
-    const session_id = jsPsych.data.getURLVariable('SESSION_ID');
+    const subject_id: string = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    const study_id: string = jsPsych.data.getURLVariable('STUDY_ID');
+    const session_id: string = jsPsych.data.getURLVariable('SESSION_ID');
 
     jsPsych.data.addProperties({
         subject_id: subject_id,
@@ -18,13 +20,9 @@ export default function Experiment() {
     });
     
     //holds each phase of the experiment in order - welcome, instructions, trial, etc..
-    const timeline = [];
+    const timeline: Array<object> = [];
 
     //put the different face images to test here
-    const trial_faces = [
-        { stimulus: '<img src="https://gitlab.linghai.me/nxdens/task-images/-/raw/main/CFD-AF-200-228-N.jpg?inline=false" alt="Person making a face" width="400" height="400">'},
-        { stimulus: '<img src="https://gitlab.linghai.me/nxdens/task-images/-/raw/main/CFD-AF-252-135-N.jpg?inline=false" alt="Person making a face" width="400" height="400">'}
-    ];
 
     //type is the interaction plugin to use - we are using the html keyboard response here which means the stimulus is HTML
     //and the response is a keyboard input. We don't provide input choices here since the user can press any key to begin
@@ -42,19 +40,11 @@ export default function Experiment() {
     }
     timeline.push(instructions);
 
-    const trial = {
-        type: jsPsychHtmlButtonResponse,
-        stimulus: jsPsych.timelineVariable("stimulus"),
-        choices: ['Positive', 'Neutral', 'Negative']
-    }
+    let pretask = new Pretask();
+    pretask.setupAndPushToTimeline(jsPsych, timeline, -1);
 
-    //a procedure uses a timeline variable to show a repeated series of trials. It runs the timeline once for each element in the timeline
-    //variable - in this case the timeline variable is trial_faces so it will run twice if it contains two stimuli
-    const test_procedure = {
-        timeline: [trial],
-        timeline_variables: trial_faces
-    };
-    timeline.push(test_procedure);
+    let mainTask = new MainTask();
+    mainTask.setupAndPushToTimeline(jsPsych, timeline, -1);
 
     const completion_page = {
         type: jsPsychHtmlKeyboardResponse,
@@ -67,7 +57,9 @@ export default function Experiment() {
 
     jsPsych.run(timeline);
 
-    return;
+    console.log(timeline);
+
+    return (<></>);
 }
 
 /*
