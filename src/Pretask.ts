@@ -14,7 +14,7 @@ export class Pretask implements SurveyBlock{
 
         const pretaskFaces: Array<object> = [];
         for(let i = 0; i < 40; i++){
-            pretaskFaces.push({stimulus: `<img src="pretask.png" alt="Person making a face" width="400" height="400`});
+            pretaskFaces.push({stimulus: `<img src="pretask.png" alt="Pretaskyyyy" width="400" height="400`});
         }
         shuffle(pretaskFaces);
         //a procedure uses a timeline variable to show a repeated series of trials. It runs the timeline once for each element in the timeline
