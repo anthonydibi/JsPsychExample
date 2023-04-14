@@ -1,12 +1,13 @@
 import { JsPsych } from "jspsych";
 import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
-import { SurveyBlock } from "./SurveyBlock";
 import { shuffle } from "./utils";
+import { TrialKind } from "./Trial";
 
-export class Pretask implements SurveyBlock{
+export class Pretask{
 
     setupAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>, index: number){
         const trialConfig = {
+            kind: TrialKind.PRE,
             type: jsPsychHtmlButtonResponse,
             stimulus: jsPsych.timelineVariable("stimulus"),
             choices: ['Positive', 'Negative']

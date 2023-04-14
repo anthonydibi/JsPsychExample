@@ -44,7 +44,7 @@ export default function Experiment() {
     pretask.setupAndPushToTimeline(jsPsych, timeline, -1);
 
     let mainTask = new MainTask();
-    mainTask.setupAndPushToTimeline(jsPsych, timeline, -1);
+    mainTask.setupTrialsAndPushToTimeline(jsPsych, timeline, -1);
 
     const completion_page = {
         type: jsPsychHtmlKeyboardResponse,
@@ -56,8 +56,6 @@ export default function Experiment() {
     timeline.push(completion_page);
 
     jsPsych.run(timeline);
-
-    console.log(timeline);
 
     return (<></>);
 }
