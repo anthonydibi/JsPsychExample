@@ -4,6 +4,7 @@ import { TrialKind } from "./Trial";
 import { shuffle } from "./utils";
 import { randomInt } from "./utils";
 import { Catch } from "./Catch";
+import { Distraction } from "./Distraction";
 
 export class MainTask{
 
@@ -24,15 +25,13 @@ export class MainTask{
                 jump = n + (n - lastJump!);
             }
             firstInPair = !firstInPair;
-            console.log(jump);
             curIdx += jump;
             fn(arr.at(curIdx));
             times--;
         }
     }
 
-    setupTrialsAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>, index: number){
-
+    setupTrialsAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>){
         const mainTaskTrials: Array<object> = [];
         for(let i = 0; i < 120; i++){
             mainTaskTrials.push({
@@ -43,6 +42,10 @@ export class MainTask{
             });
         }
         shuffle(mainTaskTrials);
+        let d = new Distraction();
+        for(let i = 29; i < 120; i += 29){
+            d.addDistraction(mainTaskTrials, i);
+        }
         let c = new Catch();
         this._every(15, 7, c.setCatch, mainTaskTrials);
         //a procedure uses a timeline variable to show a repeated series of trials. It runs the timeline once for each element in the timeline

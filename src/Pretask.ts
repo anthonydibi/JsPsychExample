@@ -5,7 +5,7 @@ import { TrialKind } from "./Trial";
 
 export class Pretask{
 
-    setupAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>, index: number){
+    setupAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>){
         const trialConfig = {
             kind: TrialKind.PRE,
             type: jsPsychHtmlButtonResponse,

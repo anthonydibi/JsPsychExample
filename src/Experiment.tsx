@@ -41,10 +41,10 @@ export default function Experiment() {
     timeline.push(instructions);
 
     let pretask = new Pretask();
-    pretask.setupAndPushToTimeline(jsPsych, timeline, -1);
+    pretask.setupAndPushToTimeline(jsPsych, timeline);
 
     let mainTask = new MainTask();
-    mainTask.setupTrialsAndPushToTimeline(jsPsych, timeline, -1);
+    mainTask.setupTrialsAndPushToTimeline(jsPsych, timeline);
 
     const completion_page = {
         type: jsPsychHtmlKeyboardResponse,
