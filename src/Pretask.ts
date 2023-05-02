@@ -5,7 +5,7 @@ import { TrialKind } from "./Trial";
 
 export class Pretask{
 
-    setupAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>){
+    async setupAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>){
         const trialConfig = {
             kind: TrialKind.PRE,
             type: jsPsychHtmlButtonResponse,
@@ -13,9 +13,13 @@ export class Pretask{
             choices: ['Positive', 'Negative']
         };
 
+        const imageUrlResponse = await fetch("https://7qfbe3atn3.execute-api.us-east-1.amazonaws.com/default/get_pretask_images?task=pre-task",
+            {method: "GET", mode: "cors"});
+        const imageUrls: Array<string> = await imageUrlResponse.json();
+
         const pretaskFaces: Array<object> = [];
         for(let i = 0; i < 40; i++){
-            pretaskFaces.push({stimulus: `<img src="pretask.png" alt="Pretaskyyyy" width="400" height="400`});
+            pretaskFaces.push({stimulus: `<img src=${imageUrls[i]} alt="Pretaskyyyy" width="400" height="400`});
         }
         shuffle(pretaskFaces);
         //a procedure uses a timeline variable to show a repeated series of trials. It runs the timeline once for each element in the timeline

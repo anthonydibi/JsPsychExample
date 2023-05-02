@@ -4,7 +4,7 @@ import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response'
 import { Pretask } from "./Pretask";
 import { MainTask } from "./MainTask";
 
-export default function Experiment() {
+export default async function Experiment() {
     const jsPsych: JsPsych = initJsPsych({ on_finish: function(): void {
         jsPsych.data.displayData();
     }});
@@ -41,10 +41,10 @@ export default function Experiment() {
     timeline.push(instructions);
 
     let pretask = new Pretask();
-    pretask.setupAndPushToTimeline(jsPsych, timeline);
+    await pretask.setupAndPushToTimeline(jsPsych, timeline);
 
     let mainTask = new MainTask();
-    mainTask.setupTrialsAndPushToTimeline(jsPsych, timeline);
+    await mainTask.setupTrialsAndPushToTimeline(jsPsych, timeline);
 
     const completion_page = {
         type: jsPsychHtmlKeyboardResponse,
