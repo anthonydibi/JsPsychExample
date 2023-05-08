@@ -6,7 +6,7 @@ it that way in case I needed to build an interface for the survey. However, JsPs
 
 ## Project Structure
 
-Most files in interest are found in `src`. `App.tsx` is the root of the app, and renders the `Experiment` component (although, this component does not actually *render* anything itself, it just calls JsPsych to render things). Experiment is where the timeline for the experiment is built. Also, an attempt is made to post a record to the REDCap API. Logic for the different sections of the experiment live in different files - for example, `Pretask.ts` holds the logic for generating the pretask stimuli.
+Most files of interest are found in `src`. `App.tsx` is the root of the app, and renders the `Experiment` component (although, this component does not actually *render* anything itself, it just calls JsPsych to render things). Experiment is where the timeline for the experiment is built. Also, an attempt is made to post a record to the REDCap API. Logic for the different sections of the experiment live in different files - for example, `Pretask.ts` holds the logic for generating the pretask stimuli.
 
 ## Running locally
 Prerequisites
