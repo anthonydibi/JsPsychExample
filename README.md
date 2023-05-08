@@ -28,3 +28,11 @@ If you want to change the appearance of the JsPsych HTML elements, it is quite e
 The JsPsych documentation also gives good advice on how to use developer tools to find class names for JsPsych elements you want to apply styles to:
 ![image](https://user-images.githubusercontent.com/57297382/236931387-a341870f-8bea-48e7-8720-fbc45deca38c.png)
 
+## Deployment
+This survey has components deployed to various places. The front end for the survey is deployed to Netlify under my personal Github account - if you would like to deploy this to a UPMC account, it is quite easy as Netlify is very user-friendly - just follow the instructions [here](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/). Images for the survey are retrieved from an S3 bucket, under Linghai Wang's AWS account. The URLs are retrieved from a Lambda function that is exposed through an API gateway under this same account. This API relies on the images being kept in a folder related to their task - for example, pre-task images can be stored under a folder named `pre-task`, and URLs for these images can be fetched like so:
+```js
+const imageUrlResponse = await fetch("https://7qfbe3atn3.execute-api.us-east-1.amazonaws.com/default/get_pretask_images?task=pre-task",
+    {method: "GET", mode: "cors"});
+const imageUrls: Array<string> = await imageUrlResponse.json();
+```
+then `imageUrls` will contain all of the image URLs under that folder.
