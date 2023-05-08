@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# UPMC Survey Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+This is a survey task built using JsPsych. It is bootstrapped using `create-react-app`, although it would function identically without being built in React - I had just bootstrapped
+it that way in case I needed to build an interface for the survey. However, JsPsych handles all of the user input and UI.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+Most files in interest are found in `src`. `App.tsx` is the root of the app, and renders the `Experiment` component (although, this component does not actually *render* anything itself, it just calls JsPsych to render things). Experiment is where the timeline for the experiment is built. Also, an attempt is made to post a record to the REDCap API. Logic for the different sections of the experiment live in different files - for example, `Pretask.ts` holds the logic for generating the pretask stimuli.
 
-### `npm start`
+## Running locally
+Prerequisites
+- [Install `git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Install `npm` and `nodejs`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+ 
+To run this project, clone the repository using `git clone <url>`, where `<url>` is this repo's url. Then, run `npm install` in the project directory to install dependencies, and then `npm run start` to run a server for the survey on `localhost`. `npm` should automatically open the locally hosted survey in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## JsPsych
+[JsPsych](https://www.jspsych.org/7.3/) is a behavior experiment building framework for the browser. It provides an interface for displaying stimuli to users and collecting their reactions to those stimuli. Their documentation is great, so anything you want to learn about it can be found at the above link.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Styling
+If you want to change the appearance of the JsPsych HTML elements, it is quite easy to do so. You can follow the instructions [here](https://www.jspsych.org/7.0/overview/style/) - simply add new CSS rules to `jspsych.css`. For example, to change the appearance of a JsPsych button, you could add a rule like this to `jspsych.css`: 
+```css
+.jspsych-btn {
+  background-color: blue;
+}
+```
+The JsPsych documentation also gives good advice on how to use developer tools to find class names for JsPsych elements you want to apply styles to:
+![image](https://user-images.githubusercontent.com/57297382/236931387-a341870f-8bea-48e7-8720-fbc45deca38c.png)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
