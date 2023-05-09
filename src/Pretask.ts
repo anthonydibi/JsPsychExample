@@ -13,7 +13,7 @@ export class Pretask{
             choices: ['Positive', 'Negative']
         };
 
-        const imageUrlResponse = await fetch("https://7qfbe3atn3.execute-api.us-east-1.amazonaws.com/default/get_pretask_images?task=pre-task",
+        const imageUrlResponse = await fetch(`${process.env.REACT_APP_LAMBDA_URL}?task=pre-task`,
             {method: "GET", mode: "cors"});
         const imageUrls: Array<string> = await imageUrlResponse.json();
 

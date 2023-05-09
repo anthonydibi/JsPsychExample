@@ -11,7 +11,7 @@ export default function Experiment() {
             jsPsych.data.displayData();
         }});
 
-        let record = [{"record_id": 21231231, "intro_doc": "2", "intro_first": "James", "intro_last": "Moorehead", "intro_initials": "J_Moo", "intro_email": "jamesdmoorehead@gmail.com", "intro_send": "1", "gpn_intro_consent_complete": "2", "consent_age": "65", "consent6": "James D Moorehead", "consent7": "1956-01-09", "consent8": "1", "consent9": "Yes", "consent_date": "2020-07-29", "gpn_consent_complete": "2", "sig_agree": "0", "sig_consent": "James Moorehead, BS", "sig_signature": "signature_2020-07-29_1049.png", "sig_time": "2020-07-29 10:48", "gpn_signature_complete": "2"}];
+        let record = {"record_id": 21231231, "intro_doc": "2", "intro_first": "James", "intro_last": "Moorehead", "intro_initials": "J_Moo", "intro_email": "jamesdmoorehead@gmail.com", "intro_send": "1", "gpn_intro_consent_complete": "2", "consent_age": "65", "consent6": "James D Moorehead", "consent7": "1956-01-09", "consent8": "1", "consent9": "Yes", "consent_date": "2020-07-29", "gpn_consent_complete": "2", "sig_agree": "0", "sig_consent": "James Moorehead, BS", "sig_signature": "signature_2020-07-29_1049.png", "sig_time": "2020-07-29 10:48", "gpn_signature_complete": "2"};
     
         let requestBody = {
             token: "14985E6EAEB3A378CF4DBA82685B4017",
@@ -21,11 +21,11 @@ export default function Experiment() {
             action: "import",
             overwriteBehavior: "normal",
             forceAutoNumber: "true",
-            data: record
+            data: JSON.stringify(record)
         }
         const res = await fetch("https://www.ctsiredcap.pitt.edu/redcap/api/", {
-            method: "POST",
-            body: JSON.stringify(requestBody),
+            method: "post",
+            body: requestBody,
         });
 
         

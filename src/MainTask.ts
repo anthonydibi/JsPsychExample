@@ -33,7 +33,7 @@ export class MainTask{
 
     async setupTrialsAndPushToTimeline(jsPsych: JsPsych, timeline: Array<object>){
         const mainTaskTrials: Array<object> = [];
-        const mainImageUrlsResponse = await fetch("https://7qfbe3atn3.execute-api.us-east-1.amazonaws.com/default/get_pretask_images?task=task",
+        const mainImageUrlsResponse = await fetch(`${process.env.REACT_APP_LAMBDA_URL}?task=task`,
             {method: "GET", mode: "cors"});
         const mainImageUrls: Array<string> = await mainImageUrlsResponse.json();
         for(let i = 0; i < 120; i++){
@@ -47,7 +47,7 @@ export class MainTask{
         shuffle(mainTaskTrials);
 
         let d = new Distraction();
-        const distractionImageUrlsResponse = await fetch("https://7qfbe3atn3.execute-api.us-east-1.amazonaws.com/default/get_pretask_images?task=distraction",
+        const distractionImageUrlsResponse = await fetch(`${process.env.REACT_APP_LAMBDA_URL}?task=distraction`,
             {method: "GET", mode: "cors"});
         const distractionImageUrls: Array<string> = await distractionImageUrlsResponse.json();
         let distractionImageIndex = 0;
